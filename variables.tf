@@ -9,6 +9,18 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "ca_domain_name" {
+  description = "Name of CodeArtifact domain"
+  type        = string
+  default     = "mwaa"
+}
+
+variable "ca_repo_name" {
+  description = "Name of CodeArtifact repo"
+  type        = string
+  default     = "mwaa_repo"
+}
+
 variable "airflow_version" {
   description = "Version of Airflow to deploy on MWAA"
   type        = string

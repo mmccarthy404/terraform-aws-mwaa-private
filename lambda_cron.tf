@@ -95,7 +95,7 @@ resource "aws_lambda_function" "mwaa_update_ca_index_url" {
     variables = {
       CA_DOMAIN          = aws_codeartifact_domain.mwaa_ca_domain.domain
       CA_DOMAIN_OWNER    = aws_codeartifact_domain.mwaa_ca_domain.owner
-      CA_REPOSITORY_NAME = aws_codeartifact_repository.mwaa_ca_repo.id
+      CA_REPOSITORY_NAME = var.ca_repo_name
       BUCKET_NAME        = aws_s3_bucket.mwaa_s3.id
     }
   }
@@ -116,10 +116,9 @@ resource "aws_cloudwatch_event_target" "mwaa_update_ca_index_url_target" {
 
 data "aws_lambda_invocation" "mwaa_update_ca_index_url_invoke" {
   function_name = aws_lambda_function.mwaa_update_ca_index_url.id
-  input = ""
+  input         = ""
 
   depends_on = [
-    aws_codeartifact_repository.mwaa_ca_repo,
     aws_s3_bucket_public_access_block.mwaa_s3_public_access_block,
     aws_s3_bucket_versioning.mwaa_s3_versioning
   ]

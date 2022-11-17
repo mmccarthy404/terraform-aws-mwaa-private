@@ -34,9 +34,3 @@ data "aws_subnets" "selected" {
 data "aws_route_table" "selected" {
   subnet_id = data.aws_subnets.selected.ids[0]
 }
-
-data "aws_codeartifact_repository_endpoint" "mwaa_ca_repo_endpoint" {
-  domain     = aws_codeartifact_domain.mwaa_ca_domain.domain
-  repository = aws_codeartifact_repository.mwaa_ca_repo.repository
-  format     = "pypi"
-}

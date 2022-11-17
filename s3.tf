@@ -19,11 +19,7 @@ resource "aws_s3_bucket_versioning" "mwaa_s3_versioning" {
 }
 
 resource "aws_s3_object" "requirements" {
-  bucket = aws_s3_bucket.mwaa_s3.id
-  key    = var.s3_requirements_path
-  content = join("\n", [
-    "// requirements.txt",
-    "-c https://raw.githubusercontent.com/apache/airflow/constraints-${var.airflow_version}/constraints-3.7.txt",
-    "-r /usr/local/airflow/dags/codeartifact.txt"
-  ])
+  bucket  = aws_s3_bucket.mwaa_s3.id
+  key     = var.s3_requirements_path
+  content = "-r /usr/local/airflow/dags/codeartifact.txt"
 }
